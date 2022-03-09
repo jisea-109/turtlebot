@@ -33,7 +33,7 @@ class GoToPose():
 
 	# What to do if shut down (e.g. Ctrl-C or failure)
 	rospy.on_shutdown(self.shutdown)
-	
+
 	# Tell the action client that we want to spin a thread by default
 	self.move_base = actionlib.SimpleActionClient("move_base", MoveBaseAction)
 	rospy.loginfo("Wait for the action server to come up")
@@ -54,7 +54,7 @@ class GoToPose():
         self.move_base.send_goal(goal)
 
 	# Allow TurtleBot up to 60 seconds to complete task
-	success = self.move_base.wait_for_result(rospy.Duration(60)) 
+	success = self.move_base.wait_for_result(rospy.Duration(60))
 
         state = self.move_base.get_state()
         result = False
@@ -80,9 +80,9 @@ if __name__ == '__main__':
         navigator = GoToPose()
 
         # Customize the following values so they are appropriate for your location
-        x = # SPECIFY X COORDINATE HERE
-        y = # SPECIFY Y COORDINATE HERE
-        theta = # SPECIFY THETA (ROTATION) HERE
+        x = 0# SPECIFY X COORDINATE HERE
+        y = 0# SPECIFY Y COORDINATE HERE
+        theta = 0# SPECIFY THETA (ROTATION) HERE
         position = {'x': x, 'y' : y}
         quaternion = {'r1' : 0.000, 'r2' : 0.000, 'r3' : np.sin(theta/2.0), 'r4' : np.cos(theta/2.0)}
 
@@ -99,4 +99,3 @@ if __name__ == '__main__':
 
     except rospy.ROSInterruptException:
         rospy.loginfo("Ctrl-C caught. Quitting")
-
